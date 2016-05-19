@@ -39,6 +39,6 @@ As a result, each of the 4 sub-cell will be interpolated once in the same cell, 
 The only thing to do is to multiply by the right coefficient. 
 
 To illustrated: We sum 4 times in the 4 diagonal directions. The coefficient for the sum can be represented by a single matrix which is turned.
-[Illustration](./images/interpolation_illustration.jpg)
+![Illustration](./images/interpolation_illustration.jpg)
 
 Finally the histograms in each cell are summed to obtain the `(n_cells_x, n_cells_y, nbins)` desired orientation_histogram (which can be further normalise block-wise).
