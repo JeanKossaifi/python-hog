@@ -420,8 +420,8 @@ def normalise_histogram(orientation_histogram, bx, by, n_cells_x, n_cells_y, nbi
         n_blocksy = (n_cells_y - by) + 1
         normalised_blocks = np.zeros((n_blocksy, n_blocksx, nbins))
 
-        for x in range(n_blocksy):
-            for y in range(n_blocksx):
+        for x in range(n_blocksx):
+            for y in range(n_blocksy):
                 block = orientation_histogram[y:y + by, x:x + bx, :]
                 normalised_blocks[y, x, :] = np.clip(block[0, 0, :] / np.sqrt(block.sum()**2 + eps), 0, 0.2)
                 normalised_blocks[y, x, :] /= np.sqrt(normalised_blocks[y, x, :].sum()**2 + eps)
