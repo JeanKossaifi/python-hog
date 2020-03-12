@@ -412,8 +412,8 @@ def normalise_histogram(orientation_histogram, bx, by, n_cells_x, n_cells_y, nbi
     
     if bx==1 and by==1: #faster version
         normalised_blocks = np.clip(
-          orientation_histogram / np.sqrt(orientation_histogram.sum(axis=-1)**2 + eps)[:, :, np.newaxis], 0, 0.2)
-        normalised_blocks /= np.sqrt(normalised_blocks.sum(axis=-1)**2 + eps)[:, :, np.newaxis]
+          orientation_histogram / np.sqrt((orientation_histogram**2).sum(axis=-1) + eps)[:, :, np.newaxis], 0, 0.2)
+        normalised_blocks /= np.sqrt((normalised_blocks**2).sum(axis=-1) + eps)[:, :, np.newaxis]
         
     else:
         n_blocksx = (n_cells_x - bx) + 1
@@ -423,8 +423,8 @@ def normalise_histogram(orientation_histogram, bx, by, n_cells_x, n_cells_y, nbi
         for x in range(n_blocksx):
             for y in range(n_blocksy):
                 block = orientation_histogram[y:y + by, x:x + bx, :]
-                normalised_blocks[y, x, :] = np.clip(block[0, 0, :] / np.sqrt(block.sum()**2 + eps), 0, 0.2)
-                normalised_blocks[y, x, :] /= np.sqrt(normalised_blocks[y, x, :].sum()**2 + eps)
+                normalised_blocks[y, x, :] = np.clip(block[0, 0, :] / np.sqrt((block**2).sum() + eps), 0, 0.2)
+                normalised_blocks[y, x, :] /= np.sqrt((normalised_blocks[y, x, :]**2).sum() + eps)
 
     return normalised_blocks
 
